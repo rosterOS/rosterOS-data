@@ -46,10 +46,4 @@ jobs:
           git commit -m "sync adp ${DATE}"
           git push
 
-      - name: Trigger dataplatform ADP sync
-        if: steps.changes.outputs.changed == 'true'
-        uses: peter-evans/repository-dispatch@v3
-        with:
-          token: ${{ secrets.DATAPLATFORM_DISPATCH_TOKEN }}
-          repository: rosterOS/rosterOSdataplatform
-          event-type: adp-updated
+
