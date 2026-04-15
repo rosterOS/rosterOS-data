@@ -1,0 +1,47 @@
+name: Scrape Underdog ADP
+
+on:
+  schedule:
+    # Run daily at 06:00 UTC (1 AM ET / 10 PM PT) during draft season
+    - cron: "0 6 * * *"
+  workflow_dispatch: # allow manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Run ADP scraper
+        working-directory: scraper
+        run: node scrape-adp.js
+
+      - name: Build adp.json from CSV
+        run: node scripts/build-adp-json.cjs
+
+      - name: Check for changes
+        id: changes
+        run: |
+          git add -N adp.json data/adp.csv snapshots/
+          git diff --quiet adp.json data/adp.csv && echo "changed=false" >> "$GITHUB_OUTPUT" || echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Commit and push updated ADP data
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git config user.name "rosterOS"
+          git config user.email "noreply@rosteros.app"
+          DATE=$(date -u +%Y-%m-%d)
+          git add adp.json data/adp.csv snapshots/
+          git commit -m "sync adp ${DATE}"
+          git push

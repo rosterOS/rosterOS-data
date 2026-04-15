@@ -1,0 +1,10 @@
+{
+  "name": "rosteros-adp-scraper",
+  "version": "4.0.0",
+  "description": "Fetches Underdog Fantasy ADP data from public Stats API endpoints (no login required)",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "scrape": "node scrape-adp.js"
+  }
+}
