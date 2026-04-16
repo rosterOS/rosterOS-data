@@ -2,8 +2,8 @@ name: Scrape Underdog ADP
 
 on:
   schedule:
-    # Run daily at 06:00 UTC (1 AM ET / 10 PM PT) during draft season
-    - cron: "0 6 * * *"
+    # Run daily at 13:00 UTC (8 AM ET / 5 AM PT) during draft season
+    - cron: "0 13 * * *"
   workflow_dispatch: # allow manual trigger
 
 permissions:
