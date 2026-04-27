@@ -1763,7 +1763,7 @@
     "id": "e861f743-837a-47dd-a2a9-de23d4e7e363",
     "name": "Dalton Schultz",
     "adp": 177.6,
-    "projectedPoints": 109.3,
+    "projectedPoints": 106,
     "positionRank": "",
     "position": "TE",
     "team": "HOU",
@@ -1996,17 +1996,17 @@
     "projectedPoints": 0,
     "positionRank": "",
     "position": "QB",
-    "team": "PIT",
+    "team": "",
     "byeWeek": ""
   },
   {
     "id": "d8c4bb3c-9908-4fa5-8ece-b0afde6f2bcd",
-    "name": "Chris Brazzell II",
+    "name": "Chris Brazzell",
     "adp": 201.1,
-    "projectedPoints": 0,
+    "projectedPoints": 70.8,
     "positionRank": "",
     "position": "WR",
-    "team": "",
+    "team": "CAR",
     "byeWeek": ""
   },
   {
@@ -3196,7 +3196,7 @@
     "projectedPoints": 0,
     "positionRank": "",
     "position": "RB",
-    "team": "",
+    "team": "KC",
     "byeWeek": ""
   },
   {
@@ -3296,7 +3296,7 @@
     "projectedPoints": 0,
     "positionRank": "",
     "position": "RB",
-    "team": "",
+    "team": "JAX",
     "byeWeek": ""
   },
   {
@@ -3456,7 +3456,7 @@
     "projectedPoints": 0,
     "positionRank": "",
     "position": "RB",
-    "team": "",
+    "team": "MIA",
     "byeWeek": ""
   },
   {
@@ -3856,7 +3856,7 @@
     "projectedPoints": 0,
     "positionRank": "",
     "position": "TE",
-    "team": "",
+    "team": "DAL",
     "byeWeek": ""
   },
   {
@@ -4526,7 +4526,7 @@
     "projectedPoints": 0,
     "positionRank": "",
     "position": "WR",
-    "team": "",
+    "team": "MIN",
     "byeWeek": ""
   },
   {
@@ -5586,7 +5586,7 @@
     "projectedPoints": 0,
     "positionRank": "",
     "position": "RB",
-    "team": "",
+    "team": "NO",
     "byeWeek": ""
   },
   {
@@ -5736,7 +5736,7 @@
     "projectedPoints": 0,
     "positionRank": "",
     "position": "WR",
-    "team": "NO",
+    "team": "",
     "byeWeek": ""
   },
   {
@@ -6006,7 +6006,7 @@
     "projectedPoints": 0,
     "positionRank": "",
     "position": "WR",
-    "team": "NO",
+    "team": "",
     "byeWeek": ""
   },
   {
@@ -6636,7 +6636,7 @@
     "projectedPoints": 0,
     "positionRank": "",
     "position": "QB",
-    "team": "",
+    "team": "LV",
     "byeWeek": ""
   },
   {
@@ -8316,7 +8316,7 @@
     "projectedPoints": 0,
     "positionRank": "",
     "position": "WR",
-    "team": "",
+    "team": "JAX",
     "byeWeek": ""
   },
   {
@@ -9096,7 +9096,7 @@
     "projectedPoints": 0,
     "positionRank": "",
     "position": "RB",
-    "team": "NO",
+    "team": "",
     "byeWeek": ""
   },
   {
@@ -9916,7 +9916,7 @@
     "projectedPoints": 0,
     "positionRank": "",
     "position": "WR",
-    "team": "",
+    "team": "LAC",
     "byeWeek": ""
   },
   {
@@ -10136,7 +10136,7 @@
     "projectedPoints": 0,
     "positionRank": "",
     "position": "QB",
-    "team": "",
+    "team": "DET",
     "byeWeek": ""
   },
   {
@@ -10146,7 +10146,7 @@
     "projectedPoints": 0,
     "positionRank": "",
     "position": "QB",
-    "team": "",
+    "team": "TB",
     "byeWeek": ""
   },
   {
@@ -10176,7 +10176,7 @@
     "projectedPoints": 0,
     "positionRank": "",
     "position": "TE",
-    "team": "",
+    "team": "PHI",
     "byeWeek": ""
   },
   {
