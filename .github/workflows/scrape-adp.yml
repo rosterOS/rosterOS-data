@@ -25,6 +25,12 @@ jobs:
 
       - name: Run ADP scraper
         working-directory: scraper
+        env:
+          UNDERDOG_SLATE_ID: a9c04e81-1ace-4b16-a31d-4c725a47f16f
+          UNDERDOG_SCORING_TYPE_ID: ccf300b0-9197-5951-bd96-cba84ad71e86
+          UNDERDOG_PRODUCT: fantasy
+          UNDERDOG_PRODUCT_EXPERIENCE_ID: 018e1234-5678-9abc-def0-123456789002
+          UNDERDOG_STATE_CONFIG_ID: 48c035e5-a055-4413-81c3-51b7f5928efa
         run: node scrape-adp.js
 
       - name: Build adp.json from CSV

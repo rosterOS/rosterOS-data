@@ -22,6 +22,13 @@
  *   node scrape-adp.js --dry-run             # fetch only, don't write files
  *   node scrape-adp.js --output ./out.csv    # custom output path
  *   node scrape-adp.js --rankings-id <uuid>  # override slate ID
+ *
+ * Optional env overrides:
+ *   UNDERDOG_SLATE_ID
+ *   UNDERDOG_SCORING_TYPE_ID
+ *   UNDERDOG_PRODUCT
+ *   UNDERDOG_PRODUCT_EXPERIENCE_ID
+ *   UNDERDOG_STATE_CONFIG_ID
  */
 
 import { writeFileSync, mkdirSync } from "node:fs";
@@ -46,12 +53,38 @@ const cliSlateId = (() => {
   return i !== -1 ? args[i + 1] : null;
 })();
 
-// ── API constants ──────────────────────────────────────────────────
-const SLATE_ID       = cliSlateId || "8f9df7e5-d6ab-4a51-87e1-f91f5c806912";
-const SCORING_TYPE   = "ccf300b0-9197-5951-bd96-cba84ad71e86";
+const cliProductExperienceId = (() => {
+  const i = args.indexOf("--product-experience-id");
+  return i !== -1 ? args[i + 1] : null;
+})();
 
-const PLAYERS_URL     = `https://stats.underdogfantasy.com/v1/slates/${SLATE_ID}/players?product=fantasy`;
-const APPEARANCES_URL = `https://stats.underdogfantasy.com/v1/slates/${SLATE_ID}/scoring_types/${SCORING_TYPE}/appearances?product=fantasy`;
+const cliStateConfigId = (() => {
+  const i = args.indexOf("--state-config-id");
+  return i !== -1 ? args[i + 1] : null;
+})();
+
+// ── API constants ──────────────────────────────────────────────────
+const SLATE_ID =
+  cliSlateId || process.env.UNDERDOG_SLATE_ID || "a9c04e81-1ace-4b16-a31d-4c725a47f16f";
+const SCORING_TYPE =
+  process.env.UNDERDOG_SCORING_TYPE_ID || "ccf300b0-9197-5951-bd96-cba84ad71e86";
+const PRODUCT = process.env.UNDERDOG_PRODUCT || "fantasy";
+const PRODUCT_EXPERIENCE_ID =
+  cliProductExperienceId ||
+  process.env.UNDERDOG_PRODUCT_EXPERIENCE_ID ||
+  "018e1234-5678-9abc-def0-123456789002";
+const STATE_CONFIG_ID =
+  cliStateConfigId || process.env.UNDERDOG_STATE_CONFIG_ID || "48c035e5-a055-4413-81c3-51b7f5928efa";
+
+const query = new URLSearchParams({
+  product: PRODUCT,
+  product_experience_id: PRODUCT_EXPERIENCE_ID,
+  state_config_id: STATE_CONFIG_ID,
+});
+
+const PLAYERS_URL = `https://stats.underdogfantasy.com/v1/slates/${SLATE_ID}/players?${query.toString()}`;
+const APPEARANCES_URL =
+  `https://stats.underdogfantasy.com/v1/slates/${SLATE_ID}/scoring_types/${SCORING_TYPE}/appearances?${query.toString()}`;
 
 const USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36";
 
