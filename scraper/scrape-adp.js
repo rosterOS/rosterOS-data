@@ -29,6 +29,7 @@
  *   UNDERDOG_PRODUCT
  *   UNDERDOG_PRODUCT_EXPERIENCE_ID
  *   UNDERDOG_STATE_CONFIG_ID
+ *   SNAPSHOT_TIME_ZONE               # defaults to America/New_York
  */
 
 import { writeFileSync, mkdirSync } from "node:fs";
@@ -40,6 +41,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
 const ADP_CSV_PATH = resolve(ROOT, "data", "adp.csv");
 const SNAPSHOTS_DIR = resolve(ROOT, "snapshots");
+const SNAPSHOT_TIME_ZONE = process.env.SNAPSHOT_TIME_ZONE || "America/New_York";
 
 // ── CLI flags ──────────────────────────────────────────────────────
 const args = process.argv.slice(2);
@@ -244,6 +246,23 @@ function findArray(obj) {
   return best;
 }
 
+function snapshotDateInTimeZone(now = new Date(), timeZone = SNAPSHOT_TIME_ZONE) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(now);
+
+  const byType = Object.fromEntries(
+    parts
+      .filter((p) => p.type !== "literal")
+      .map((p) => [p.type, p.value])
+  );
+
+  return `${byType.year}-${byType.month}-${byType.day}`;
+}
+
 /** Fetch a URL and return the parsed JSON body with retry and timeout. */
 async function fetchJson(url, { retries = 3, timeoutMs = 30_000 } = {}) {
   for (let attempt = 1; attempt <= retries; attempt++) {
@@ -394,10 +413,10 @@ async function main() {
   console.log(`[scraper] Wrote ${outPath}`);
 
   mkdirSync(SNAPSHOTS_DIR, { recursive: true });
-  const date = new Date().toISOString().slice(0, 10);
+  const date = snapshotDateInTimeZone();
   const snapshotPath = resolve(SNAPSHOTS_DIR, `adp_${date}.csv`);
   writeFileSync(snapshotPath, csv, "utf8");
-  console.log(`[scraper] Wrote snapshot ${snapshotPath}`);
+  console.log(`[scraper] Wrote snapshot ${snapshotPath} (${SNAPSHOT_TIME_ZONE})`);
 }
 
 main().catch((err) => {
